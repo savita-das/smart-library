@@ -1,0 +1,114 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Library</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { 
+            getFirestore, collection, addDoc, getDocs,
+            updateDoc, doc, deleteDoc
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHQxBaZk2yn5lTJyGNRpyPocqI0si224A",
+  authDomain: "smart-library-29f69.firebaseapp.com",
+  projectId: "smart-library-29f69",
+  storageBucket: "smart-library-29f69.firebasestorage.app",
+  messagingSenderId: "705158868194",
+  appId: "1:705158868194:web:d7744240938e83957842bb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.getDocs = getDocs;
+        window.updateDoc = updateDoc;
+        window.doc = doc;
+        window.deleteDoc = deleteDoc;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script defer src="https://unpkg.com/face-api.js"></script> -->
+     <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+      
+     <script defer src="script.js"></script>
+</head>
+
+<body>
+<div id="particles-js"></div>
+
+<div id="loginPage">
+    <h2>🔐 Login</h2>
+
+    <!-- Manual Login -->
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <hr>
+
+    <!-- Face Login -->
+    <h3>😊 Face Login</h3>
+
+    <input id="faceName" placeholder="Enter Name">
+
+    <video id="video" width="300" height="220" autoplay muted></video>
+
+    <br>
+
+    <button onclick="registerFace()">📸 Register Face</button>
+    <button onclick="loginWithFace()">🔓 Face Login</button>
+</div>
+
+<div id="mainPage" style="display:none;">
+    <h1 id="tite" class="title">📚 Smart Library</h1>
+     <!-- 📊 DASHBOARD (ADD HERE 👇) -->
+    <div class="chart-box">
+    <canvas id="chart"></canvas>
+</div>
+     <!-- <p style="color:red">${alertMsg}</p> -->
+    <!-- Dark Mode -->
+    <button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <p>Total Books: <span id="total"></span></p>
+        <p>Issued: <span id="issued"></span></p>
+        <p>Available: <span id="available"></span></p>
+    </div>
+
+    <!-- Search -->
+    <input id="search" placeholder="🔍 Search..." onkeyup="searchBooks()">
+
+    <div id="voiceIndicator" style="display: none; color: red; font-weight: bold; margin-top: 10px;">
+  <span class="dot"></span> Listening...
+</div>
+    
+<div class="form-box">
+    <input id="title" placeholder="Book Title">
+    <input id="author" placeholder="Author">
+
+    <button onclick="addBook()">Add</button>
+    <button onclick="startScanner()">📷 Scan Book</button>
+    <button onclick="startVoice()">🎤 Voice</button>
+
+    <!-- ✅ Scanner will open here -->
+    <div id="reader" style="margin-top:15px;"></div>
+</div>
+
+
+
+    <ul id="bookList" class="book-grid"></ul>
+</div>
+
+<!-- <script src="script.js"></script> -->
+</body>
+</html> 
